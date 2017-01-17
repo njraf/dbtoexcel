@@ -14,19 +14,51 @@ public class DBHelper {
 		
 	}
 	
-	public Connection connect(String DBName, String username, String password) {
-		String url = "jdbc:mysql://localhost:3306/"+DBName;
-		connection = null;
-		
+	public Connection connect(String username, String password, String host, String port, String DBName) {
+		String url = "jdbc:mysql://"+host+":"+port+"/"+DBName;
 		try {
 			connection = DriverManager.getConnection(url, username, password);
-		    //System.out.println("Database connected!");
+			
+			if(DBName.isEmpty()) {
+				System.out.println("Invalid database name");
+				connection.close();
+			    System.exit(0);
+			}
+			
+			//System.out.println("Database connected!");
 		} catch (SQLException e) {
-		    throw new IllegalStateException("Cannot connect the database!", e);
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			System.out.println("Invalid database name");
+			try {
+				connection.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				//e1.printStackTrace();
+			}
+		    System.exit(0);
 		}
 		
-		return connection;
+			
 		
+		return connection;		
+	}
+	
+	public boolean validName(String name) throws SQLException {
+		// Connection connection = <your java.sql.Connection>
+		ResultSet resultSet = connection.getMetaData().getCatalogs();
+
+		//iterate each catalog in the ResultSet
+		while (resultSet.next()) {
+		  // Get the database name, which is at position 1
+		  if(name == resultSet.getString(1)) {
+			  resultSet.close();
+			  return true;
+		  }
+		  
+		}
+		resultSet.close();
+		return false;
 	}
 	
 	public ResultSet query(String q) {
