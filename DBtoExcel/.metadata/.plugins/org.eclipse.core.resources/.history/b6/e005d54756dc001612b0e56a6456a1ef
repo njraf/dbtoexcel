@@ -1,0 +1,99 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class DBHelper {
+	
+	Connection connection;
+	Statement stmt;
+	ResultSet rs;
+
+	public void DBHelper() {
+		
+	}
+	
+	public Connection connect(String DBName, String username, String password) {
+		String url = "jdbc:mysql://localhost:3306/"+DBName;
+		 = null;
+		
+		try {
+			connection = DriverManager.getConnection(url, username, password);
+		    System.out.println("Database connected!");
+		} catch (SQLException e) {
+		    throw new IllegalStateException("Cannot connect the database!", e);
+		}
+		
+		return connection;
+		
+	}
+	
+	public ResultSet query(Connection conn, String q) {
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(q);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return rs;
+	}
+	
+	public String[] getColumnNames() throws SQLException {
+		int cols = rs.getMetaData().getColumnCount();
+		String[] data = new String[cols];
+		
+		for(int x = 0; x < cols; x++) {
+			System.out.print(rs.getMetaData().getColumnName(x+1)+", \t");
+			data[x] = rs.getMetaData().getColumnName(x+1);
+		}
+		System.out.println();
+		
+		return data;
+	}
+	
+	public String[] getRow() throws SQLException {
+		int cols = rs.getMetaData().getColumnCount();
+		String[] data = new String[cols];
+		
+		for(int x = 0; x < cols; x++) {
+			System.out.print(rs.getString(x+1)+", \t");
+			data[x] = rs.getString(x+1);
+		}
+		System.out.println();
+		
+		return data;
+	}
+	
+	public int getNumRows() throws SQLException {
+		rs.last();
+		int last = rs.getRow()-1;
+		rs.first();
+		return last;
+	}
+	
+	public int getNumCols() throws SQLException {
+		return rs.getMetaData().getColumnCount();
+	}
+	
+	public void close() {
+		if (rs != null) {
+	        try {
+	            rs.close();
+	        } catch (SQLException sqlEx) { } // ignore
+
+	        rs = null;
+	    }
+
+	    if (stmt != null) {
+	        try {
+	            stmt.close();
+	        } catch (SQLException sqlEx) { } // ignore
+
+	        stmt = null;
+	    }
+	}
+}

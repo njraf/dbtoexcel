@@ -1,0 +1,83 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class DBHelper {
+	
+	Statement stmt;
+	ResultSet rs;
+
+	public void DBHelper() {
+		
+	}
+	
+	public Connection connect(String DBName, String username, String password) {
+		String url = "jdbc:mysql://localhost:3306/"+DBName;
+		Connection connection = null;
+		
+		try {
+			connection = DriverManager.getConnection(url, username, password);
+		    System.out.println("Database connected!");
+		} catch (SQLException e) {
+		    throw new IllegalStateException("Cannot connect the database!", e);
+		}
+		
+		return connection;
+		
+	}
+	
+	public ResultSet query(Connection conn, String q) {
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(q);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return rs;
+	}
+	
+	public String[] getColumnNames() throws SQLException {
+		int cols = rs.getMetaData().getColumnCount();
+		String[] data = new String[cols];
+		
+		for(int x = 0; x < cols; x++) {
+			System.out.print(rs.getMetaData().getColumnName(x+1)+", \t");
+			data[x] = rs.getMetaData().getColumnName(x+1);
+		}
+		
+		return data;
+	}
+	
+	public String[] getRow() {
+		
+	}
+	
+	public int getNumRows() {
+		int last = rs.last()-1;
+		rs.first();
+		return last;
+	}
+	
+	public void close() {
+		if (rs != null) {
+	        try {
+	            rs.close();
+	        } catch (SQLException sqlEx) { } // ignore
+
+	        rs = null;
+	    }
+
+	    if (stmt != null) {
+	        try {
+	            stmt.close();
+	        } catch (SQLException sqlEx) { } // ignore
+
+	        stmt = null;
+	    }
+	}
+}

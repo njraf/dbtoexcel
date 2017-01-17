@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/njraf_000/Documents/Java jars/mysql-connector-java-5.1.39-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/njraf_000/Documents/Java jars/ApachePOIjars/commons-codec-1.10.jar"/>
+	<classpathentry kind="lib" path="C:/Users/njraf_000/Documents/Java jars/ApachePOIjars/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/njraf_000/Documents/Java jars/ApachePOIjars/curvesapi-1.03.jar"/>
+	<classpathentry kind="lib" path="C:/Users/njraf_000/Documents/Java jars/ApachePOIjars/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="C:/Users/njraf_000/Documents/Java jars/ApachePOIjars/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/njraf_000/Documents/Java jars/ApachePOIjars/poi-3.14-20160307.jar"/>
+	<classpathentry kind="lib" path="C:/Users/njraf_000/Documents/Java jars/ApachePOIjars/poi-examples-3.14-20160307.jar"/>
+	<classpathentry kind="lib" path="C:/Users/njraf_000/Documents/Java jars/ApachePOIjars/poi-excelant-3.14-20160307.jar"/>
+	<classpathentry kind="lib" path="C:/Users/njraf_000/Documents/Java jars/ApachePOIjars/poi-ooxml-3.14-20160307.jar"/>
+	<classpathentry kind="lib" path="C:/Users/njraf_000/Documents/Java jars/ApachePOIjars/poi-ooxml-schemas-3.14-20160307.jar"/>
+	<classpathentry kind="lib" path="C:/Users/njraf_000/Documents/Java jars/ApachePOIjars/poi-scratchpad-3.14-20160307.jar"/>
+	<classpathentry kind="lib" path="C:/Users/njraf_000/Documents/Java jars/ApachePOIjars/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
