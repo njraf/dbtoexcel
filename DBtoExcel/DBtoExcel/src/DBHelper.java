@@ -14,7 +14,7 @@ public class DBHelper {
 		
 	}
 	
-	public Connection connect(String username, String password, String host, String port, String DBName) {
+	public Boolean connect(String username, String password, String host, String port, String DBName) {
 		String url = "jdbc:mysql://"+host+":"+port+"/"+DBName;
 		try {
 			connection = DriverManager.getConnection(url, username, password);
@@ -22,7 +22,7 @@ public class DBHelper {
 			if(DBName.isEmpty()) {
 				System.out.println("Invalid database name");
 				connection.close();
-			    System.exit(0);
+			    return false;
 			}
 			
 			//System.out.println("Database connected!");
@@ -30,18 +30,13 @@ public class DBHelper {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();
 			System.out.println("Invalid database name");
-			try {
-				connection.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				//e1.printStackTrace();
-			}
-		    System.exit(0);
+			
+		    return false;
 		}
 		
 			
 		
-		return connection;		
+		return true;		
 	}
 	
 	public boolean validName(String name) throws SQLException {

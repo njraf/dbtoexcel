@@ -2,7 +2,7 @@
 <section name="Workbench">
 	<item value="C:\Users\njraf_000\Documents\Java jars\ApachePOIjars" key="org.eclipse.jdt.ui.lastextjar"/>
 	<section name="FatJarPackageWizard">
-		<item value="C:\Users\njraf_000\Desktop\Java Workspace\DBtoExcel" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
+		<item value="C:\Users\njraf_000\Desktop\Java Workspace\DBtoExcel.xml" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
 		<item value="DBtoExcel - DBtoExcel" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
 		<item value="C:\Users\njraf_000\Desktop\DBtoExcel.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
 		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>

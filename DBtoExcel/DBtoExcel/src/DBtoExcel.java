@@ -11,9 +11,12 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class DBtoExcel {
@@ -31,13 +34,16 @@ public class DBtoExcel {
 	//swing variables
 	JFrame frame;
 	JPanel panel;
+	JPanel filePanel;
 	JTextField pathText;
 	JTextField hostText;
 	JTextField databaseText;
 	JTextField portText;
 	JTextField usernameText;
-	JTextField passwordText;
+	JPasswordField passwordText;
 	JButton submit;
+	JButton browse;
+	JFileChooser chooser;
 	
 	public static void main(String[] args) throws SQLException, IOException {
 		// TODO Auto-generated method stub
@@ -63,12 +69,30 @@ public class DBtoExcel {
 		databaseText = new JTextField();
 		portText = new JTextField();
 		usernameText = new JTextField();
-		passwordText = new JTextField();
+		passwordText = new JPasswordField();
 		submit = new JButton("Submit");
+		browse = new JButton("Browse...");
 		
 		panel = new JPanel();
+		filePanel = new JPanel();
 		panel.setLayout(new GridLayout(0, 2));
-		panel.add(new JLabel("File destination:"));
+		
+		filePanel.add(new JLabel("File destination:"));
+		chooser = new JFileChooser();
+		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		browse.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+					pathText.setText(chooser.getSelectedFile().getPath());
+				}
+			}
+		});
+		filePanel.add(browse);
+		panel.add(filePanel);
+		
 		panel.add(pathText);
 		panel.add(new JLabel("Host:"));
 		panel.add(hostText);
@@ -89,13 +113,25 @@ public class DBtoExcel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				
 				String path = pathText.getText();
 				if(!path.endsWith("/") && !path.endsWith("\\")) {
 					path += "/";
 				}
 				
 				dbhelper = new DBHelper();
-				dbhelper.connect(usernameText.getText(), passwordText.getText(), hostText.getText(), portText.getText(), databaseText.getText());
+				if(!dbhelper.connect(usernameText.getText(), //if not connected
+						passwordText.getText(), 
+						hostText.getText(), 
+						portText.getText(), 
+						databaseText.getText())) {
+					//dialog
+					JOptionPane.showMessageDialog(null, "Could not connect.\nMake sure host name, database name, "
+							+ "port number, username, and password are correct");
+					
+					setDefaults();
+					return;
+				}
 				poi = new POIHelper(path+databaseText.getText()+".xlsx");
 				
 				try {
