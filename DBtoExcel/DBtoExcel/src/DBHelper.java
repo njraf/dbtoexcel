@@ -28,8 +28,8 @@ public class DBHelper {
 			//System.out.println("Database connected!");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			//e.printStackTrace();
-			System.out.println("Invalid database name");
+			e.printStackTrace();
+			System.out.println("Unknown Error");
 			
 		    return false;
 		}

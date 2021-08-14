@@ -129,7 +129,7 @@ public class DBtoExcel {
 					JOptionPane.showMessageDialog(null, "Could not connect.\nMake sure host name, database name, "
 							+ "port number, username, and password are correct");
 					
-					setDefaults();
+					//setDefaults();
 					return;
 				}
 				poi = new POIHelper(path+databaseText.getText()+".xlsx");
@@ -158,7 +158,9 @@ public class DBtoExcel {
 				dbhelper.close();
 				poi.close();
 				
-				setDefaults();
+				JOptionPane.showMessageDialog(null, "Success! Created " + pathText.getText() + "\\" + databaseText.getText() + ".xlsx");
+				
+				//setDefaults();
 			}
 		});
 		
